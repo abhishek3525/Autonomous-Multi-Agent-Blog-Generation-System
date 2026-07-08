@@ -4,6 +4,7 @@ import operator
 import os
 import random
 import re
+import threading
 import time
 from datetime import date, timedelta
 from pathlib import Path
@@ -177,7 +178,7 @@ def _tavily_search(query: str, max_results: int = 5) -> List[dict]:
                 {
                     "title": r.get("title") or "",
                     "url": r.get("url") or "",
-                    "snippet": r.get("content") or r.get("snippet") or "",
+                    "snippet": (r.get("content") or r.get("snippet") or "")[:800],
                     "published_at": r.get("published_date") or r.get("published_at"),
                     "source": r.get("source"),
                 }
@@ -207,10 +208,10 @@ Rules:
 """
 
 def research_node(state: State) -> dict:
-    queries = (state.get("queries") or [])[:10]
+    queries = (state.get("queries") or [])[:3]
     raw: List[dict] = []
     for q in queries:
-        raw.extend(_tavily_search(q, max_results=6))
+        raw.extend(_tavily_search(q, max_results=3))
 
     if not raw:
         return {"evidence": []}
@@ -336,47 +337,51 @@ Code:
 - If requires_code==true, include at least one minimal snippet.
 """
 
+_worker_lock = threading.Lock()
+
 def worker_node(payload: dict) -> dict:
-    # Stagger execution of parallel workers to prevent free-tier rate limits
-    time.sleep(random.uniform(0.5, 4.0))
-    task = Task(**payload["task"])
-    plan = Plan(**payload["plan"])
-    evidence = [EvidenceItem(**e) for e in payload.get("evidence", [])]
+    # Stagger execution and run parallel workers sequentially using a lock
+    # to strictly avoid hitting Groq's RPM/TPM rate limits on free-tier accounts.
+    with _worker_lock:
+        time.sleep(2.0)
+        task = Task(**payload["task"])
+        plan = Plan(**payload["plan"])
+        evidence = [EvidenceItem(**e) for e in payload.get("evidence", [])]
 
-    bullets_text = "\n- " + "\n- ".join(task.bullets)
-    evidence_text = "\n".join(
-        f"- {e.title} | {e.url} | {e.published_at or 'date:unknown'}"
-        for e in evidence[:20]
-    )
+        bullets_text = "\n- " + "\n- ".join(task.bullets)
+        evidence_text = "\n".join(
+            f"- {e.title} | {e.url} | {e.published_at or 'date:unknown'}"
+            for e in evidence[:20]
+        )
 
-    section_md = llm.invoke(
-        [
-            SystemMessage(content=WORKER_SYSTEM),
-            HumanMessage(
-                content=(
-                    f"Blog title: {plan.blog_title}\n"
-                    f"Audience: {plan.audience}\n"
-                    f"Tone: {plan.tone}\n"
-                    f"Blog kind: {plan.blog_kind}\n"
-                    f"Constraints: {plan.constraints}\n"
-                    f"Topic: {payload['topic']}\n"
-                    f"Mode: {payload.get('mode')}\n"
-                    f"As-of: {payload.get('as_of')} (recency_days={payload.get('recency_days')})\n\n"
-                    f"Section title: {task.title}\n"
-                    f"Goal: {task.goal}\n"
-                    f"Target words: {task.target_words}\n"
-                    f"Tags: {task.tags}\n"
-                    f"requires_research: {task.requires_research}\n"
-                    f"requires_citations: {task.requires_citations}\n"
-                    f"requires_code: {task.requires_code}\n"
-                    f"Bullets:{bullets_text}\n\n"
-                    f"Evidence (ONLY cite these URLs):\n{evidence_text}\n"
-                )
-            ),
-        ]
-    ).content.strip()
+        section_md = llm.invoke(
+            [
+                SystemMessage(content=WORKER_SYSTEM),
+                HumanMessage(
+                    content=(
+                        f"Blog title: {plan.blog_title}\n"
+                        f"Audience: {plan.audience}\n"
+                        f"Tone: {plan.tone}\n"
+                        f"Blog kind: {plan.blog_kind}\n"
+                        f"Constraints: {plan.constraints}\n"
+                        f"Topic: {payload['topic']}\n"
+                        f"Mode: {payload.get('mode')}\n"
+                        f"As-of: {payload.get('as_of')} (recency_days={payload.get('recency_days')})\n\n"
+                        f"Section title: {task.title}\n"
+                        f"Goal: {task.goal}\n"
+                        f"Target words: {task.target_words}\n"
+                        f"Tags: {task.tags}\n"
+                        f"requires_research: {task.requires_research}\n"
+                        f"requires_citations: {task.requires_citations}\n"
+                        f"requires_code: {task.requires_code}\n"
+                        f"Bullets:{bullets_text}\n\n"
+                        f"Evidence (ONLY cite these URLs):\n{evidence_text}\n"
+                    )
+                ),
+            ]
+        ).content.strip()
 
-    return {"sections": [(task.id, section_md)]}
+        return {"sections": [(task.id, section_md)]}
 
 # ============================================================
 # 8) ReducerWithImages (subgraph)
