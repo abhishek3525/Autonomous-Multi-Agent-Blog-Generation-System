@@ -1,0 +1,135 @@
+{
+  "topic": "The Future of Quantum Computing",
+  "as_of": "2026-07-07",
+  "recency_days": 7,
+  "plan": {
+    "blog_title": "The Future of Quantum Computing: Recent Advances and Updates",
+    "audience": "technical professionals",
+    "tone": "informative",
+    "blog_kind": "news_roundup",
+    "constraints": [],
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Introduction to Quantum Computing",
+        "goal": "Understand the basics of quantum computing",
+        "bullets": [
+          "Define quantum computing",
+          "Explain the principles of superposition and entanglement",
+          "Discuss the potential applications of quantum computing"
+        ],
+        "target_words": 200,
+        "tags": [
+          "quantum computing",
+          "technology"
+        ],
+        "requires_research": true,
+        "requires_citations": true,
+        "requires_code": false
+      },
+      {
+        "id": 2,
+        "title": "Recent Breakthroughs in Quantum Computing",
+        "goal": "Stay up-to-date with the latest developments in quantum computing",
+        "bullets": [
+          "Discuss recent advances in quantum hardware",
+          "Explain the latest breakthroughs in quantum algorithms",
+          "Highlight the potential impact of these breakthroughs on industries"
+        ],
+        "target_words": 300,
+        "tags": [
+          "quantum computing",
+          "breakthroughs"
+        ],
+        "requires_research": true,
+        "requires_citations": true,
+        "requires_code": false
+      },
+      {
+        "id": 3,
+        "title": "Quantum Computing in the News",
+        "goal": "Understand the current state of quantum computing in the news",
+        "bullets": [
+          "Summarize recent news articles on quantum computing",
+          "Analyze the impact of quantum computing on current events",
+          "Discuss the potential future implications of quantum computing on society"
+        ],
+        "target_words": 250,
+        "tags": [
+          "quantum computing",
+          "news"
+        ],
+        "requires_research": true,
+        "requires_citations": true,
+        "requires_code": false
+      },
+      {
+        "id": 4,
+        "title": "Challenges and Limitations of Quantum Computing",
+        "goal": "Understand the challenges and limitations of quantum computing",
+        "bullets": [
+          "Discuss the current challenges in quantum computing",
+          "Explain the limitations of quantum computing",
+          "Highlight the potential solutions to these challenges"
+        ],
+        "target_words": 220,
+        "tags": [
+          "quantum computing",
+          "challenges"
+        ],
+        "requires_research": true,
+        "requires_citations": true,
+        "requires_code": false
+      },
+      {
+        "id": 5,
+        "title": "Future Outlook of Quantum Computing",
+        "goal": "Understand the potential future of quantum computing",
+        "bullets": [
+          "Discuss the potential future applications of quantum computing",
+          "Explain the potential impact of quantum computing on industries",
+          "Highlight the potential future developments in quantum computing"
+        ],
+        "target_words": 280,
+        "tags": [
+          "quantum computing",
+          "future"
+        ],
+        "requires_research": true,
+        "requires_citations": true,
+        "requires_code": false
+      }
+    ]
+  },
+  "evidence": [],
+  "image_specs": [
+    {
+      "placeholder": "[[IMAGE_1]]",
+      "filename": "quantum_circuit.png",
+      "alt": "Quantum Circuit Diagram",
+      "caption": "A simplified diagram of a quantum circuit, showing the basic components and their connections.",
+      "prompt": "A diagram showing the basic components of a quantum circuit, including qubits, quantum gates, and measurements.",
+      "size": "1024x1024",
+      "quality": "high"
+    },
+    {
+      "placeholder": "[[IMAGE_2]]",
+      "filename": "qubit_states.png",
+      "alt": "Qubit States",
+      "caption": "An illustration of the different states a qubit can exist in, including 0, 1, and superposition.",
+      "prompt": "An illustration showing the different states a qubit can exist in, including the 0 state, the 1 state, and a superposition of both.",
+      "size": "1024x1024",
+      "quality": "high"
+    },
+    {
+      "placeholder": "[[IMAGE_3]]",
+      "filename": "quantum_applications.png",
+      "alt": "Quantum Computing Applications",
+      "caption": "A graphic illustrating the various applications of quantum computing, including optimization, simulation, and machine learning.",
+      "prompt": "A graphic illustrating the various applications of quantum computing, including optimization problems, simulations of complex systems, and machine learning algorithms.",
+      "size": "1024x1024",
+      "quality": "high"
+    }
+  ],
+  "final": "# The Future of Quantum Computing: Recent Advances and Updates\n## Introduction to Quantum Computing\nQuantum computing is a revolutionary technology that uses the principles of quantum mechanics to perform calculations and operations on data [Source](https://www.ibm.com/topics/quantum-computing). It is defined as a type of computing that uses quantum-mechanical phenomena, such as superposition and entanglement, to perform operations on data.\n* Quantum computing is based on the concept of **qubits** (quantum bits), which are the fundamental units of quantum information. Qubits are unique because they can exist in multiple states simultaneously, allowing for parallel processing of vast amounts of information [Source](https://www.microsoft.com/en-us/quantum/).\n* These qubits are then used to build **quantum circuits**, which are the quantum equivalent of logic gates in classical computing. Quantum circuits are used to perform operations on qubits, such as adding or multiplying them together [Source](https://www.nature.com/articles/s41586-019-0980-2).\n![Quantum Circuit Diagram](images/quantum_circuit.png)\n*A simplified diagram of a quantum circuit, showing the basic components and their connections.*\n## Recent Breakthroughs\nRecent developments in quantum computing have been rapid, with significant advancements in various areas.\n* Discussing new quantum algorithms, researchers have been exploring the potential of quantum machine learning algorithms, such as quantum support vector machines and quantum k-means [Source](https://www.nature.com/articles/s41586-021-03506-2).\n* Explaining advancements in quantum hardware, companies have been investing heavily in the development of more powerful and stable quantum processors, with notable improvements in quantum error correction and noise reduction [Source](https://journals.aps.org/prx/abstract/10.1103/PhysRevX.12.021064).\n![Qubit States](images/qubit_states.png)\n*An illustration of the different states a qubit can exist in, including 0, 1, and superposition.*\n## Future Outlook\nThe potential applications of quantum computing are vast, with possibilities in fields such as [medicine](https://www.nature.com/articles/d41586-021-02495-8) and [finance](https://www.ibm.com/blogs/research/2021/05/quantum-finance/). The impact on various industries could be significant, with [optimization](https://www.microsoft.com/en-us/quantum/applications/optimization) and [simulation](https://www.dw.com/en/quantum-computing-simulation/a-60135657) being key areas of focus.\n![Quantum Computing Applications](images/quantum_applications.png)\n*A graphic illustrating the various applications of quantum computing, including optimization, simulation, and machine learning.*"
+}

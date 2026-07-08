@@ -1,0 +1,24 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local environment variables and secrets
+.env
+.env.*
+
+# Python caching
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# User generated blog outputs (optional to ignore, but clean for repo)
+# If you want to commit these, you can remove them from this list.
+# *.md
+# *.json
+# images/
