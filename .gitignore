@@ -17,8 +17,9 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# User generated blog outputs (optional to ignore, but clean for repo)
-# If you want to commit these, you can remove them from this list.
-# *.md
-# *.json
-# images/
+# User generated blog outputs and deployment configurations
+*.md
+*.json
+images/
+Dockerfile
+
